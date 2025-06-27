@@ -129,8 +129,8 @@ function setupRecipeCard(card) {
 	});
 
 	// I/O SECTION (inputs & outputs share identical behavior)
-	card.querySelectorAll('.io-section').forEach(section => {
-		const side = section.classList.contains('recipe-inputs') ? 'inputs' : 'outputs';
+        card.querySelectorAll('.io-section').forEach(section => {
+                const side = section.classList.contains('recipe-inputs') ? 'inputs' : 'outputs';
 
 		// ADD / DELETE buttons
 		section.addEventListener('click', e => {
@@ -189,5 +189,15 @@ function setupRecipeCard(card) {
 			}
 			Data.saveData();
 		});
-	});
+        });
+}
+
+/**
+ * Reapply any theme dependent styling for a recipe card.
+ * Currently no-op but kept for symmetry with item cards.
+ * @param {HTMLDivElement} card
+ */
+export function updateCardTheme(card) {
+        // No theme-specific styling for recipe cards yet
+        void card;
 }
