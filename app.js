@@ -9,6 +9,13 @@ import * as Controls    from './controls.js';
 import * as Theme       from './theme.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+  const updateCardThemes = () => {
+    document.querySelectorAll('.item-card').forEach(card => ItemCards.updateCardTheme(card));
+    document.querySelectorAll('.recipe-card').forEach(card => RecipeCards.updateCardTheme(card));
+  };
+
+  window.addEventListener('themeChange', updateCardThemes);
+
   Theme.initThemeToggle();
   Tabs.initTabSwitching();
   Gutter.initGutterDrag();
@@ -26,6 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Object.values(Data.craftingData.recipes)
     .forEach(recipe => RecipeCards.renderRecipeCard(recipe));
+
+  // Apply theme to all cards initially
+  updateCardThemes();
 
   // Global Enter→blur for any <input>
   document.addEventListener('keydown', e => {

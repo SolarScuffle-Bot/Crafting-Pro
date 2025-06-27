@@ -117,9 +117,6 @@ export const setupItemCard = card => {
 		CardBase.applyTint(src, headerEl, bodyEl);
 	});
 
-	window.addEventListener('themeChange', e => {
-		CardBase.applyTint(iconEl.src, headerEl, bodyEl);
-	});
 
 	// name editing (no duplicates)
 	nameIn.addEventListener('input', () => {
@@ -308,9 +305,22 @@ export const setupItemCard = card => {
 		ni.setSelectionRange(ni.value.length, ni.value.length);
 	});
 
-	window.dispatchEvent(
-		new CustomEvent('itemChange', { detail: { id: itemData.id, card, changed: 'create' } })
-	);
+        window.dispatchEvent(
+                new CustomEvent('itemChange', { detail: { id: itemData.id, card, changed: 'create' } })
+        );
+};
+
+/**
+ * Reapply theme-dependent tinting on an existing item-card.
+ * @param {HTMLDivElement} card
+ */
+export const updateCardTheme = card => {
+        const headerEl = card.querySelector('.card-header');
+        const bodyEl = card.querySelector('.card-body');
+        const iconEl = card.querySelector('.icon');
+        if (headerEl && bodyEl && iconEl) {
+                CardBase.applyTint(iconEl.src, headerEl, bodyEl);
+        }
 };
 
 // TODO:
