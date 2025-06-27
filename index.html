@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Crafting System</title>
+	<link rel="stylesheet" href="CSS/structure.css">
+	<link rel="stylesheet" href="CSS/style.css">
+
+	<link rel="stylesheet" href="CSS/recipecard.css">
+	<link rel="stylesheet" href="CSS/itemcard.css">
+</head>
+
+<body data-theme="light">
+	<header>
+		<div class="logo">Crafting Pro</div>
+		<nav>
+			<button id="tab-manage" class="active">Manage</button>
+			<button id="tab-visualize">Visualize</button>
+		</nav>
+
+		<button id="theme-toggle" aria-label="Toggle Theme">🌞</button>
+	</header>
+
+	<main>
+		<!-- Manage View: Items & Recipes -->
+		<section id="manage">
+			<div class="panel list" id="items-list">
+				<div class="header">
+					<button id="add-item" class="header-button" disabled>+ Item</button>
+					<input id="search-items" class="search-bar" placeholder="Type new item name…" autocomplete="off">
+
+					<div class="sort-buttons">
+						<button id="sort-name" class="header-button">Name</button>
+						<button id="sort-az" class="header-button">A-Z</button>
+						<button id="sort-za" class="header-button">Z-A</button>
+						<button id="sort-recent" class="header-button">Recent</button>
+					</div>
+				</div>
+				<div class="list-body">
+					<ul id="items-ul">
+						<!-- item cards injected here -->
+					</ul>
+				</div>
+			</div>
+
+			<div id="gutter"></div>
+
+			<div class="panel list" id="recipes-list">
+				<div class="header">
+					<button id="add-recipe" class="header-button">+ Recipe</button>
+					<input type="text" id="search-recipe-inputs" class="search-bar" placeholder="Search recipe inputs…" autocomplete="off">
+					<input type="number" id="search-recipe-duration" class="search-bar" placeholder="Search recipe duration…" autocomplete="off">
+					<input type="text" id="search-recipe-outputs" class="search-bar" placeholder="Search recipe outputs…" autocomplete="off">
+				</div>
+				<div>
+					<ul id="recipes-ul">
+						<!-- recipe cards injected here -->
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Visualize View: Search + Graph -->
+		<section id="visualize">
+			<div class="panel search-bar">
+				<input id="visual-search" placeholder="Search item…" autocomplete="off">
+				<input id="visual-quantity" placeholder="Qty" type="number" min="1" value="1">
+				<button id="visual-horizontal-view">Horizontal Graph</button>
+				<button id="visual-vertical-view">Vertical Graph</button>
+			</div>
+			<div class="panel canvas" id="graph-canvas">
+				<!-- graph rendering goes here -->
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<button id="import" class="header-button">Import</button>
+		<button id="export" class="header-button">Export</button>
+		<button id="reset" class="header-button">Reset</button>
+	</footer>
+
+	<datalist id="item-list"></datalist>
+
+	<script type="module" src="app.js"></script>
+</body>
+
+</html>

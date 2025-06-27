@@ -1,0 +1,100 @@
+/* structure.css */
+/* Structural rules: layout, positioning, sizing, box model */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo {
+  margin-right: 20px;
+}
+
+nav button {
+  margin-right: 5px;
+  padding: 5px 10px;
+}
+
+main {
+  height: calc(100vh - 100px);
+  overflow: hidden;
+}
+
+section {
+  display: none;
+  height: 100%;
+}
+
+#manage {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 8px minmax(200px, 1fr);
+  grid-template-rows: 1fr;
+  height: 100%;
+  min-height: 0;
+}
+
+#visualize {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+#gutter {
+  width: 8px;
+}
+
+#recipes-ul {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.panel.list {
+  display: flex;
+  flex-direction: column;
+  /* fill the 1fr height instead of growing with content */
+  height: 100%;
+  /* allow its flex-kids to scroll */
+  min-height: 0;
+}
+
+.panel.list .header {
+  padding: 8px;
+}
+
+.list-body {
+  flex: 1 1 auto;
+  /* take all remaining space */
+  padding: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* UL just flows into columns—no forced height/overflow */
+.list-body ul {
+  column-width: 220px;
+  column-gap: 6px;
+  column-fill: balance;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.header-button {
+	padding: 4px 8px;
+}
+
+.sort-buttons {
+	display: inline-flex;
+	gap: 4px;
+	margin-left: 8px;
+}
