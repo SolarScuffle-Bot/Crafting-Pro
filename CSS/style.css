@@ -70,6 +70,13 @@ body[data-theme="dark"] {
 
 	--outline-invalid: 2px solid #f44;
 	--focus-outline: 2px solid #888888;
+
+	/* Semantic */
+	--color-delete-bg: #f44;
+
+	/* Transitions (same as light) */
+	/* --transition-default: 0.3s ease; */
+	/* --transition-opacity: 0.05s; */
 }
 
 body {
@@ -112,6 +119,122 @@ nav button.active {
 	background: var(--bg-panel-header);
 }
 
+.card-header {
+	background: var(--bg-header);
+}
+
+.card-header .name {
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+.card-body {
+	opacity: 0;
+	background: var(--bg-body);
+	transition: all var(--transition-default);
+}
+
+.item-card.minimized {
+	cursor: zoom-in;
+}
+
+.item-card.expanded {
+	cursor: zoom-out;
+}
+
+.item-card.expanded .card-body,
+.recipe-card.expanded .card-body {
+	opacity: 1;
+}
+
+.overlay-btn-holder {
+	opacity: 0;
+	transition: opacity 0.05s;
+}
+
+.item-card:hover .overlay-btn-holder,
+.recipe-card:hover .overlay-btn-holder {
+	opacity: 1;
+}
+
+.item-wrapper .delete-btn {
+	transition: all var(--transition-opacity);
+	cursor: pointer;
+}
+.item-wrapper .delete-btn {
+	opacity: 0;
+}
+.item-wrapper:hover .delete-btn {
+	opacity: 1;
+}
+
+.overlay-btn-holder button {
+	font-size: 16px;
+	line-height: 1;
+	text-align: center;
+	cursor: pointer;
+}
+
+.delete-btn {
+	width: 20px;
+	border: none;
+	background: var(--color-delete-bg);
+	color: var(--text-delete);
+	font-size: 20px;
+}
+
+.clone-btn {
+	width: 50px;
+	border: var(--border-solid);
+	background: var(--bg-button);
+	color: var(--text-primary);
+}
+
+.invalid {
+	border: var(--border-invalid);
+}
+
+.invalid:focus {
+	outline: var(--outline-invalid);
+	outline-offset: 2px;
+}
+
+.icon-upload {
+	cursor: pointer;
+}
+
+.icon-upload img:hover {
+	border: var(--border-dotted);
+}
+
+.input-style {
+	background: transparent;
+	border: none;
+	font-family: inherit;
+	transition: background 0.2s;
+	color: var(--text-primary);
+}
+
+.input-style:hover {
+	background: var(--bg-input-hover);
+	border: var(--border-dotted);
+}
+
+.input-style:focus {
+	background: var(--bg-input-focus);
+	border: var(--border-input-focus);
+}
+
+.input-style::placeholder {
+	color: var(--text-placeholder);
+}
+
+.edit-icon.file-mode {
+	font-style: italic;
+	color: var(--text-input-file-mode);
+	cursor: default;
+}
+
 .header-button {
 	border: var(--border-default);
 	background: var(--bg-button);
@@ -135,6 +258,28 @@ nav button.active {
 	height: 2em;
 }
 
+.item-card .edit-name {
+	font-weight: bold;
+}
+
+.item-card .edit-name:focus {
+	font-weight: normal;
+}
+
 .search-bar::placeholder {
 	color: var(--text-placeholder);
+}
+
+.recipe-card {
+	background-color: rgb(63, 63, 63);
+}
+
+@supports (cursor: zoom-in) {
+	.item-card.minimized {
+		cursor: zoom-in;
+	}
+
+	.item-card.expanded {
+		cursor: zoom-out;
+	}
 }
