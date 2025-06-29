@@ -270,8 +270,8 @@ function setup(card) {
 		const src = Data.getRecipe(recipeId);
 
 		Object.assign(Data.getRecipe(newId), {
-			inputs: structuredClone(src.inputs),
-			outputs: structuredClone(src.outputs),
+			inputs: JSON.parse(JSON.stringify(src.inputs)),
+			outputs: JSON.parse(JSON.stringify(src.outputs)),
 			duration: src.duration,
 			reversible: src.reversible
 		});
