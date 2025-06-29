@@ -247,6 +247,11 @@ export function initRecipeControls() {
 	});
 
 	searchRecipeDuration.addEventListener('input', e => {
+		if (e.target.value.trim() === '') {
+			e.target.classList.remove('invalid');
+			return;
+		};
+
 		const secs = Utils.parseDuration(e.target.value);
 		const isInvalid = isNaN(secs) || secs < 0;
 		e.target.classList.toggle('invalid', isInvalid);
@@ -255,6 +260,11 @@ export function initRecipeControls() {
 		}
 	});
 	searchRecipeDuration.addEventListener('blur', e => {
+		if (e.target.value.trim() === '') {
+			e.target.classList.remove('invalid');
+			return;
+		};
+
 		let secs = Utils.parseDuration(e.target.value);
 		if (isNaN(secs) || secs < 0) secs = 0;
 		e.target.classList.remove('invalid');
