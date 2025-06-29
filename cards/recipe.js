@@ -268,9 +268,10 @@ function setup(card) {
 		e.stopPropagation();
 		const newId = Data.addRecipe();
 		const src = Data.getRecipe(recipeId);
+
 		Object.assign(Data.getRecipe(newId), {
-			inputs: new Array(src.inputs),
-			outputs: new Array(src.outputs),
+			inputs: structuredClone(src.inputs),
+			outputs: structuredClone(src.inputs),
 			duration: src.duration,
 			reversible: src.reversible
 		});
