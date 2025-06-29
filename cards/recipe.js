@@ -269,12 +269,25 @@ function setup(card) {
 		const newId = Data.addRecipe();
 		const src = Data.getRecipe(recipeId);
 
-		Object.assign(Data.getRecipe(newId), {
-			inputs: JSON.parse(JSON.stringify(src.inputs)),
-			outputs: JSON.parse(JSON.stringify(src.outputs)),
-			duration: src.duration,
-			reversible: src.reversible
+		const newRecipe = Data.getRecipe(newId);
+		newRecipe.reversible = src.reversible;
+		newRecipe.inputs = [];
+		newRecipe.outputs = [];
+
+		src.inputs.forEach((input, i) => {
+			newRecipe.inputs[i] = {
+				id: input.id,
+				qty: input.qty,
+			}
 		});
+
+		src.outputs.forEach((input, i) => {
+			newRecipe.outputs[i] = {
+				id: input.id,
+				qty: input.qty,
+			}
+		});
+
 		Data.updateRecipe(newId, 'duration', src.duration);
 	});
 
