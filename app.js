@@ -74,6 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (card && card.classList.contains('expanded')) {
 			card.classList.replace('expanded', 'minimized');
 		}
+
+		if (target === document.getElementById('')) {
+
+		}
 	});
 
 	document.addEventListener('mousedown', e => {

@@ -64,7 +64,7 @@ export function initItemControls() {
 		addItemBtn.disabled = !nm || Utils.itemExistsAlready(nm);
 	});
 
-	addItemBtn.addEventListener('click', () => {
+	const addItem = () => {
 		const nm = searchInput.value.trim();
 		if (nm && !Utils.itemExistsAlready(nm)) {
 			Data.addItem(nm);
@@ -72,7 +72,15 @@ export function initItemControls() {
 			addItemBtn.disabled = true;
 			searchInput.focus();
 		}
-	});
+	}
+
+	document.addEventListener('keypress', e => {
+		if (e.target === searchInput && e.key == 'Enter') {
+			addItem();
+		}
+	})
+
+	addItemBtn.addEventListener('click', addItem);
 
 	resetBtn.addEventListener('click', async e => {
 		const answer = await confirmResettingData();

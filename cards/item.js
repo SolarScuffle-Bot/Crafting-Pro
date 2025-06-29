@@ -113,6 +113,9 @@ function setup(card) {
 		}
 	});
 
+	const descEl = card.querySelector('.edit-desc');
+
+
 	// 1) initial icon + tint
 	Image.resolveIconSrc(item, IDB.getBlobURL).then(src => {
 		iconEl.src = src;
@@ -227,6 +230,7 @@ function setup(card) {
 			return;
 		}
 		Data.updateItem(id, 'icon', v || undefined);
+		Base.applyTint(iconEl.src, header, body);
 	};
 
 	// immediate on blur (in case they finish typing and tab away)

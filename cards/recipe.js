@@ -269,8 +269,8 @@ function setup(card) {
 		const newId = Data.addRecipe();
 		const src = Data.getRecipe(recipeId);
 		Object.assign(Data.getRecipe(newId), {
-			inputs: src.inputs.slice(),
-			outputs: src.outputs.slice(),
+			inputs: new Array(src.inputs),
+			outputs: new Array(src.outputs),
 			duration: src.duration,
 			reversible: src.reversible
 		});
