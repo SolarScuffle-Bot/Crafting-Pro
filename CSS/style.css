@@ -1,161 +1,408 @@
-/* ─── THEME PALETTE ───────────────────────────────────── */
+/* style.css */
+
+/* ─── Theme palettes ──────────────────────────────────── */
+/* Light theme (default) */
 :root {
-  /* your original sizing vars */
-  --header-height: 4vh;
-  --header-gaps: 1rem;
-  --footer-height: 4vh;
-  --min-header-input-width: 10rem;
-  --gutter-width: max(8px, 0.5vw);
-  --min-item-section-width: calc(var(--min-header-input-width) + 2 * var(--gutter-width));
-  --min-recipe-section-width: calc(var(--min-header-input-width) + 2 * var(--gutter-width));
-  --header-nav-gaps: 0.5rem;
+	/* Backgrounds */
+	--bg-body: #fff;
+	--bg-panel: #f5f5f5;
+	--bg-panel-header: #eee;
+	--bg-header: #ddd;
+	--bg-button: #eee;
+	--bg-nav-active: #ccc;
+	--bg-sort-active: #ddd;
+	--bg-input-hover: #fff;
+	--bg-input-focus: #fff;
+	--bg-gutter: #ccc;
 
-  /* == LIGHT THEME COLORS (DEFAULT) == */
-  --color-bg:        #ffffff;
-  --color-text:      #333333;
-  --color-panel-bg:  #f5f5f5;
-  --color-header-bg: #e0e0e0;
-  --color-card-bg:   #ffffff;
-  --color-control:   #ffffff;
-  --color-accent:    #dddddd;
-  --color-footer-bg: #e0e0e0;
+	/* Text */
+	--text-primary: #000;
+	--text-delete: #fff;
+	--text-placeholder: #777777;
+	--text-input-file-mode: #777;
+
+	/* Borders & Outlines */
+	--border-default: 1px solid #ccc;
+	--border-solid: 1px solid #000;
+	--border-dotted: 1px dotted #000;
+	--border-input-focus: 2px solid #000;
+	--border-invalid: 1px inset red;
+	--border-sort-active: #888;
+	--outline-invalid: 2px solid red;
+	--focus-outline: 2px solid #666;
+
+	/* Semantic Colors */
+	--color-delete-bg: #e00;
+
+	/* Transitions */
+	--transition-default: 0.3s ease;
+	--transition-opacity: 0.05s;
 }
 
-/* == DARK THEME OVERRIDE == */
+/* Dark theme overrides */
 body[data-theme="dark"] {
-  --color-bg:        #1e1e1e;
-  --color-text:      #dddddd;
-  --color-panel-bg:  #252525;
-  --color-header-bg: #2b2b2b;
-  --color-card-bg:   #333333;
-  --color-control:   #3b3b3b;
-  --color-accent:    #444444;
-  --color-footer-bg: #2b2b2b;
+	/* Backgrounds */
+	--bg-body: #1e1e1e;
+	--bg-panel: #2e2e2e;
+	--bg-panel-header: #333;
+	--bg-header: #3a3a3a;
+	--bg-button: #444;
+	--bg-nav-active: #a1a1a1;
+	--bg-sort-active: #a1a1a1;
+	--bg-input-hover: #555;
+	--bg-input-focus: #666;
+	--bg-gutter: #666;
+
+	/* Text */
+	--text-primary: #eee;
+	--text-delete: #fff;
+	--text-placeholder: #969696;
+	--text-input-file-mode: #aaa;
+
+	/* Borders & Outlines */
+	--border-default: 1px solid #666;
+	--border-dotted: 1px dotted #ccc;
+	--border-solid: 1px solid #ccc;
+	--border-input-focus: 2px solid #fff;
+	--border-invalid: 1px inset #f44;
+	--border-sort-active: #aaa;
+	--outline-invalid: 2px solid #f44;
+	--focus-outline: 2px solid #888;
+
+	/* Semantic */
+	--color-delete-bg: #f44;
 }
 
-
-* {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	box-sizing: border-box;
-
-	outline-width: 1px;
-	outline-color: #000;
-	outline-style: solid;
+/* ─── Global base styles ───────────────────────────────── */
+body {
+	font-family: sans-serif;
+	line-height: 1.4;
+	background: var(--bg-body);
+	color: var(--text-primary);
 }
-
-/* body {
-	width: 100vw;
-	height: 100vh;
-} */
 
 header {
-	width: 100%;
-	display: flex;
+	background: var(--bg-header);
 }
 
-footer {
-	background-color: white;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	/* height: var(--footer-height); */
+.logo {
+	font-weight: bold;
 }
 
-button {
+nav button {
+	border: var(--border-default);
+	background: var(--bg-button);
+	color: var(--text-primary);
 	cursor: pointer;
 }
 
-/*
-	HEADER
-*/
-
-#header-container {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-direction: row;
+nav button.active {
+	background: var(--bg-nav-active);
 }
 
-#header-nav {
-	display: flex;
-	justify-content: left;
-	gap: calc(3 * var(--header-gaps));
+img {
+	border-radius: 4px;
 }
 
-#page-buttons {
-	display: flex;
-	justify-content: space-between;
-	gap: var(--header-gaps);
-}
-
-#logo {
-	display: flex;            /* make it a flex container */
-	justify-content: center;  /* horizontal centering */
-	align-items: center;      /* vertical centering */
-}
-
-/*
-	FOOTER
-*/
-
-#footer-nav {
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-}
-
-/*
-	Recycled
-*/
-
-.manage-header {
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--header-gaps);
-	height: fit-content;
-}
-
-.header-btn-style {
-	padding: 0.3rem;
-}
-
-.header-input-style {
-	width: var(--min-header-input-width);
-}
-
-.header-nav-style {
-	display: flex;
-	gap: var(--header-nav-gaps);
-}
-
-/*
-	Manage
-*/
-
-#manage-section {
-	display: grid;
-	grid-template-columns: minmax(var(--min-item-section-width), 1fr) var(--gutter-width) minmax(var(--min-recipe-section-width), 1fr);
-	grid-template-rows: 1fr;
-	min-height: 0;
-}
-
-#manage-gutter {
-	width: var(--gutter-width);
-}
-
-#manage-gutter:hover {
-	user-select: none;
+#gutter {
+	background: var(--bg-gutter);
 	cursor: col-resize;
 }
 
-#recipes-header {
-	justify-content: right;
+#gutter:hover {
+	user-select: none;
 }
 
-/*
-	Visualize
-*/
+.panel.list {
+	border: var(--border-default);
+	background: var(--bg-panel);
+}
+
+.panel.list .header {
+	background: var(--bg-panel-header);
+}
+
+/* ─── Card shells ────────────────────────────────────── */
+.card-header {
+	background: var(--bg-header);
+}
+
+.card-header .name {
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+.card-body {
+	opacity: 0;
+	background: var(--bg-body);
+	transition: all var(--transition-default);
+}
+
+.item-wrapper {
+	border: var(--border-default);
+}
+
+/* Item‐card expand/collapse */
+.item-card.minimized {
+	cursor: zoom-in;
+}
+
+.item-card.expanded {
+	cursor: zoom-out;
+}
+
+.item-card.expanded .card-body {
+	opacity: 1;
+}
+
+/* Recipe‐card expand/collapse */
+.recipe-card.expanded .card-body {
+	opacity: 1;
+}
+
+/* ─── Overlay buttons ───────────────────────────────── */
+.overlay-btn-holder {
+	opacity: 0;
+	transition: opacity var(--transition-opacity);
+	display: flex;
+}
+
+.item-card:hover .overlay-btn-holder {
+	opacity: 1;
+}
+
+.recipe-card:hover .overlay-btn-holder {
+	opacity: 1;
+}
+
+/* Delete & clone buttons */
+.overlay-btn-holder button {
+	font-size: 16px;
+	line-height: 1;
+	text-align: center;
+	cursor: pointer;
+}
+
+.delete-btn {
+	width: auto;
+	aspect-ratio: 1;
+	border: none;
+	background: var(--color-delete-bg);
+	color: var(--text-delete);
+	font-size: 20px;
+}
+
+.clone-btn {
+	width: 50px;
+	border: var(--border-solid);
+	background: var(--bg-button);
+	color: var(--text-primary);
+}
+
+.data-inputs {
+	width: 7rem;
+}
+
+/* ─── Form inputs & validation ───────────────────────── */
+.icon-upload {
+	cursor: pointer;
+}
+
+.icon-upload img:hover {
+	border: var(--border-dotted);
+}
+
+.input-style {
+	background: transparent;
+	border: none;
+	font-family: inherit;
+	transition: background 0.2s;
+	color: var(--text-primary);
+}
+
+.input-style:hover {
+	background: var(--bg-input-hover);
+	border: var(--border-dotted);
+}
+
+.input-style:focus {
+	background: var(--bg-input-focus);
+	border: var(--border-input-focus);
+}
+
+.input-style::placeholder {
+	color: var(--text-placeholder);
+}
+
+.edit-icon.file-mode {
+	font-style: italic;
+	color: var(--text-input-file-mode);
+	cursor: default;
+}
+
+.header-button {
+	border: var(--border-default);
+	background: var(--bg-button);
+	cursor: pointer;
+	font-size: 0.9em;
+	color: var(--text-primary);
+}
+
+.header-button:disabled {
+	color: var(--text-placeholder);
+}
+
+.sort-buttons button.active {
+	background: var(--bg-sort-active);
+	border-color: var(--border-sort-active);
+}
+
+.search-bar {
+	background-color: var(--bg-button);
+	color: var(--text-primary);
+	height: 2em;
+}
+
+.search-bar::placeholder {
+	color: var(--text-placeholder);
+}
+
+/* ─── Item‐card name styling ────────────────────────── */
+.item-card .edit-name {
+	font-weight: bold;
+}
+
+.item-card .edit-name:focus {
+	font-weight: normal;
+}
+
+/* ─── Recipe‐card core styling ───────────────────────── */
+.recipe-card {
+	border: var(--border-default);
+	background: var(--bg-panel);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	margin: 2px 0;
+}
+
+/* ─── Recipe body & layout ─────────────────────────── */
+.recipe-card .recipe-body {
+	padding: 4px;
+	background: var(--bg-body);
+}
+
+/* ─── I/O sections: wrap cells, equal‐height rows ───── */
+.recipe-card .recipe-inputs,
+.recipe-card .recipe-outputs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 0;
+	margin: 8px 0;
+}
+
+.recipe-card .io-cell {
+	flex: 0 0 auto;
+	width: auto;
+	position: relative;
+}
+
+/* only show overlays on hovered cell */
+.recipe-card .io-cell .overlay-btn-holder {
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity var(--transition-opacity);
+}
+
+.recipe-card .io-cell:hover .overlay-btn-holder {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* ─── Slot delete button (recipe) ───────────────────── */
+.recipe-card .overlay-btn-holder .delete-btn {
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	border: none;
+	background: var(--color-delete-bg);
+	color: var(--text-delete);
+	font-size: 16px;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background var(--transition-opacity);
+}
+
+.recipe-card .overlay-btn-holder .delete-btn:hover {
+	filter: brightness(0.9);
+}
+
+/* ─── Add-slot button ────────────────────────────────── */
+.recipe-card .io-cell.add-cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.recipe-card .io-cell.add-cell button {
+	background: var(--bg-button);
+	border: var(--border-default);
+	color: var(--text-primary);
+	width: 32px;
+	height: 32px;
+	font-size: 18px;
+	cursor: pointer;
+	transition: background var(--transition-opacity);
+}
+
+.recipe-card .io-cell.add-cell button:hover {
+	background: var(--bg-input-hover);
+}
+
+/* ─── Reversible toggle button ─────────────────────── */
+.recipe-card .reversible-btn {
+	background: none;
+	border: none;
+	font-size: 20px;
+	line-height: 1;
+	cursor: pointer;
+	color: var(--text-primary);
+	padding: 2px 6px;
+	transition: background var(--transition-opacity);
+}
+
+.recipe-card .reversible-btn:hover {
+	background: var(--bg-input-hover);
+}
+
+.invalid {
+	border: var(--border-invalid);
+}
+
+.invalid:focus {
+	border: var(--border-invalid);
+	outline: var(--outline-invalid);
+}
+
+.icon-upload {
+	position: relative;
+	display: inline-block;
+}
+
+.icon-upload .edit-icon-file {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+	/* shows the “clickable” cursor */
+	z-index: 1;
+}
+
+.recipes-list-container {
+	overflow: visible;
+}

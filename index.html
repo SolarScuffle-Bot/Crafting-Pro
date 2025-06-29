@@ -1,160 +1,85 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Crafting Pro</title>
+	<title>Crafting System</title>
+	<link rel="stylesheet" href="CSS/structure.css">
 	<link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body data-theme="light">
 	<header>
-		<div id="header-container">
-			<nav id="header-nav" class="header-nav-style">
-				<div id="logo">Crafting Pro</div>
-				<div id="page-buttons">
-					<button id="manage-btn" class="header-btn-style">Manage</button>
-					<button id="visualize-btn" class="header-btn-style">Visualize</button>
-				</div>
-			</nav>
-			<button id="theme-btn">🌞</button>
-		</div>
+		<div class="logo">Crafting Pro</div>
+		<nav>
+			<div>
+				<button id="tab-manage" class="active">Manage</button>
+				<button id="tab-visualize">Visualize</button>
+			</div>
+		</nav>
+		<button id="theme-toggle" aria-label="Toggle Theme">🌞</button>
 	</header>
+
 	<main>
-		<section id="manage-section">
-			<section id="item-panel">
-				<div id="items-header" class="manage-header">
-					<button id="add-item-btn" class="header-btn-style">+ Item</button>
-					<input id="item-search" class="header-input-style" type="text" placeholder="Add or search Item..."
-						autocomplete="off">
-					<nav id="item-sort-nav" class="header-nav-style">
-						<button id="item-sort-name" class="header-btn-style">Name</button>
-						<button id="item-sort-a-z" class="header-btn-style">A-Z</button>
-						<button id="item-sort-z-a" class="header-btn-style">Z-A</button>
-						<button id="item-sort-recent" class="header-btn-style">Recent</button>
-					</nav>
+		<!-- Manage View: Items & Recipes -->
+		<section id="manage">
+			<div class="panel list" id="items-list">
+				<div class="header">
+					<button id="add-item" class="header-button" disabled>+ Item</button>
+					<input id="search-items" class="search-bar" placeholder="Type new item name…" autocomplete="off">
+
+					<div class="sort-buttons">
+						<button id="sort-name" class="header-button">Name</button>
+						<button id="sort-az" class="header-button">A-Z</button>
+						<button id="sort-za" class="header-button">Z-A</button>
+						<button id="sort-recent" class="header-button">Recent</button>
+					</div>
 				</div>
-				<div id="item-card-list-container">
-					<ul id="item-card-list">
-						<!-- This is populated via JS -->
+				<div class="list-body">
+					<ul id="items-ul">
+						<!-- item cards injected here -->
 					</ul>
 				</div>
-			</section>
+			</div>
 
-			<div id="manage-gutter"></div>
+			<div id="gutter"></div>
 
-			<section id="recipe-panel">
-				<div id="recipes-header" class="manage-header">
-					<button id="add-recipe-btn" class="header-btn-style">+ Recipe</button>
-					<input id="recipe-search-input" class="header-input-style" type="text"
-						placeholder="Filter inputs: Item1,Item2,..." autocomplete="off">
-					<input id="recipe-search-duration" class="header-input-style" type="number" min="0"
-						placeholder="Filter durations: 60" autocomplete="off">
-					<input id="recipe-search-output" class="header-input-style" type="text"
-						placeholder="Filter outputs: Item1,Item2,..." autocomplete="off">
+			<div class="panel list" id="recipes-list">
+				<div class="header">
+					<button id="add-recipe" class="header-button">+ Recipe</button>
+					<input type="text" id="search-recipe-inputs" class="search-bar" placeholder="Search recipe inputs…" autocomplete="off" list="item-list">
+					<input type="text" id="search-recipe-duration" class="search-bar" placeholder="Search recipe duration…" autocomplete="off">
+					<input type="text" id="search-recipe-outputs" class="search-bar" placeholder="Search recipe outputs…" autocomplete="off" list="item-list">
 				</div>
-				<div id="recipe-card-list-container">
-					<ul id="recipe-card-list">
-						<!-- This is populated via JS -->
+				<div id="recipes-list-container">
+					<ul id="recipes-ul">
+						<!-- recipe cards injected here -->
 					</ul>
 				</div>
-			</section>
+			</div>
 		</section>
-		<section id="visualize-section" hidden>
-			<section id="item-selection-panel">
-				<div id="item-selection-list-container">
-					<ul id="item-selection-list">
-						<!-- This is populated via JS -->
-					</ul>
-				</div>
-			</section>
-			<section id="graph-panel">
-				<div id="graph-render-options">
-					<fieldset id="render-mode-options">
-						<legend>Render Mode:</legend>
-						<label>
-							<input type="radio" name="graph-render-mode" value="zoom-pan">
-							Zoom & Pan
-						</label>
-						<label>
-							<input type="radio" name="graph-render-mode" value="fixed">
-							Fixed
-						</label>
-					</fieldset>
 
-					<fieldset id="graph-direction-options">
-						<legend>Graph Direction:</legend>
-						<label>
-							<input type="radio" name="graph-direction-mode" value="top-bottom">
-							Top to Bottom
-						</label>
-						<label>
-							<input type="radio" name="graph-direction-mode" value="bottom-top">
-							Bottom to Top
-						</label>
-						<label>
-							<input type="radio" name="graph-direction-mode" value="left-right">
-							Left to Right
-						</label>
-						<label>
-							<input type="radio" name="graph-direction-mode" value="right-left">
-							Right to Left
-						</label>
-					</fieldset>
-				</div>
-				<div id="graph-canvas">
-					<!-- This is populated via JS -->
-				</div>
-			</section>
+		<!-- Visualize View: Search + Graph -->
+		<section id="visualize">
+			<div class="panel search-bar">
+				<input id="visual-search" placeholder="Search item…" autocomplete="off">
+				<input id="visual-quantity" placeholder="Qty" type="number" min="1" value="1">
+				<button id="visual-horizontal-view">Horizontal Graph</button>
+				<button id="visual-vertical-view">Vertical Graph</button>
+			</div>
+			<div class="panel canvas" id="graph-canvas">
+				<!-- graph rendering goes here -->
+			</div>
 		</section>
 	</main>
 
 	<footer>
-		<nav id="footer-nav" class="header-nav-style">
-			<button id="import-btn" class="header-btn-style">Import</button>
-			<button id="export-btn" class="header-btn-style">Export</button>
-			<button id="reset-btn" class="header-btn-style">Reset</button>
-		</nav>
+		<button id="import" class="header-button">Import</button>
+		<button id="export" class="header-button">Export</button>
+		<button id="reset" class="header-button">Reset</button>
 	</footer>
 
-	<template id="item-card-template">
-		<div class="overlay-btn-holder">
-			<button class="clone-btn">Clone</button>
-			<button class="delete-btn">×</button>
-		</div>
-		<div class="card-header">
-			<label class="icon-upload">
-				<img class="icon" src="" alt="" title="">
-				<input type="file" class="edit-icon-file" accept="image/*" hidden>
-			</label>
-			<input type="text" class="edit-name input-style" value="${item.name}">
-		</div>
-		<div class="card-body">
-			<label>Icon URL:<br>
-				<input type="url" class="edit-icon input-style" placeholder="https://example.com/icon.png" value="">
-			</label><br>
-			<label>Description:<br>
-				<textarea class="edit-desc"></textarea>
-			</label>
-		</div>
-	</template>
-
-	<template id="recipe-card-template">
-
-	</template>
-
-	<template id="recipe-io-template">
-
-	</template>
-
-	<template id="selected-item-template">
-
-	</template>
-
-	<template id="warning-popup-template">
-
-	</template>
+	<datalist id="item-list"></datalist>
 
 	<script type="module" src="app.js"></script>
 </body>
